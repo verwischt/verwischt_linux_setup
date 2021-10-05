@@ -1,0 +1,66 @@
+su
+nano /etc/sudoers
+
+sudo nano /etc/apt/sources.list
+
+cd ~/Downloads/
+
+sudo apt update && sudo apt upgrade
+
+sudo apt install materia-gtk-theme papirus-icon-theme
+
+sudo apt install flatpak
+sudo apt install gnome-software-plugin-flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+dpkg-deb -x discord-0.0.16.deb tmpdir
+dpkg-deb --control discord-0.0.16.deb 
+mv DEBIAN/ tmpdir/
+echo libayatana-appindicator1
+sudo gedit tmpdir/DEBIAN/control
+sudo dpkg -b tmpdir discord.deb
+sudo apt install libatomic1 libgconf-2-4 libayatana-appindicator1 libc++1
+sudo dpkg -i discord.deb
+
+sudo apt install curl gnupg2
+sudo dpkg -i 1password-latest.deb
+
+tar -C $HOME -xzf NoiseTorch_x64.tgz
+gtk-update-icon-cache
+sudo setcap 'CAP_SYS_RESOURCE=+ep' ~/.local/bin/noisetorch
+if [ -d "$HOME/.local/bin" ] ; then     PATH="$HOME/.local/bin:$PATH"; fi 
+
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client
+
+wget https://notion.davidbailey.codes/notion-linux.list
+sudo mv notion-linux.list /etc/apt/sources.list.d/notion-linux.list
+sudo apt update && sudo apt install notion-desktop
+
+wget http://ftp.debian.org/debian/pool/main/liba/libappindicator/libappindicator3-1_0.4.92-7_amd64.deb
+wget http://ftp.debian.org/debian/pool/main/libi/libindicator/libindicator3-7_0.5.0-4_amd64.deb
+sudo dpkg -i libindicator3-7_0.5.0-4_amd64.deb
+sudo dpkg -i libappindicator3-1_0.4.92-7_amd64.deb 
+sudo dpkg -i soundux-0.2.7.deb 
+sudo apt install youtube-dl ffmpeg
+
+sudo apt update
+
+sudo apt install libglib2.0-dev-bin
+sudo cp -av /usr/share/gnome-shell/gnome-shell-theme.gresource{,~}
+THEME_NAME="$(gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g")"
+THEME_SRC_DIR="/usr/share/themes/$THEME_NAME/gnome-shell"
+sudo glib-compile-resources --target="/usr/share/gnome-shell/gnome-shell-theme.gresource" --sourcedir="$THEME_SRC_DIR" "$THEME_SRC_DIR/gnome-shell-theme.gresource.xml"
+
+sudo glib-compile-resources --target="/usr/share/gnome-shell/gnome-shell-theme.gresource" --sourcedir="$THEME_SRC_DIR" "$THEME_SRC_DIR/gnome-shell-theme.gresource.xml"
+
+sudo apt install libnotify-bin
+sudo apt install git
+
+flatpak install --user https://flathub.org/repo/appstream/com.github.amikha1lov.RecApp.flatpakref
+
+
+
+
+
