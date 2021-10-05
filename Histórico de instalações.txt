@@ -45,6 +45,15 @@ sudo dpkg -i libappindicator3-1_0.4.92-7_amd64.deb
 sudo dpkg -i soundux-0.2.7.deb 
 sudo apt install youtube-dl ffmpeg
 
+wget -qO - https://packagecloud.io/shiftkey/desktop/gpgkey | sudo tee /etc/apt/trusted.gpg.d/shiftkey-desktop.asc > /dev/null
+sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/shiftkey/desktop/any/ any main" > /etc/apt/sources.list.d/packagecloud-shiftkey-desktop.list'
+sudo apt-get update
+sudo apt install github-desktop
+
+sudo apt install libnotify-bin
+sudo apt install git
+sudo apt install timeshift
+
 sudo apt update
 
 sudo apt install libglib2.0-dev-bin
@@ -54,9 +63,6 @@ THEME_SRC_DIR="/usr/share/themes/$THEME_NAME/gnome-shell"
 sudo glib-compile-resources --target="/usr/share/gnome-shell/gnome-shell-theme.gresource" --sourcedir="$THEME_SRC_DIR" "$THEME_SRC_DIR/gnome-shell-theme.gresource.xml"
 
 sudo glib-compile-resources --target="/usr/share/gnome-shell/gnome-shell-theme.gresource" --sourcedir="$THEME_SRC_DIR" "$THEME_SRC_DIR/gnome-shell-theme.gresource.xml"
-
-sudo apt install libnotify-bin
-sudo apt install git
 
 flatpak install --user https://flathub.org/repo/appstream/com.github.amikha1lov.RecApp.flatpakref
 
